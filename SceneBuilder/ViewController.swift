@@ -7,19 +7,26 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        BridgeManager.shared.findBridges().continueWith { task in
+            guard
+                let configs = task.result
+                else {
+                    return
+            }
+            
+            guard configs.count == 1 else { return }
+            
+            print(configs)
+        }
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
