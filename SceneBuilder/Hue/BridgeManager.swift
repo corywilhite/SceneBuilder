@@ -11,20 +11,54 @@ import BoltsSwift
 import Alamofire
 
 class BridgeManager {
-    static let shared = BridgeManager()
     
     struct Configuration {
         let id: String
         let internalIpAddress: String
     }
     
-    var foundConfigs: [Configuration] = []
-    
     enum BridgeDiscoveryError: Error {
         case valueNotFound
     }
     
-    func findBridges() -> Task<[Configuration]> {
+    static let shared = BridgeManager()
+    
+    private var currentConfiguration: Configuration?
+    
+    func selectBridge(configuration: Configuration) {
+        currentConfiguration = configuration
+    }
+    
+    func startBridgeRegistration(for configuration: Configuration) {
+        
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { timer in
+            
+            self.requestBridgePermssion(for: configuration, timer: timer)
+            
+        }
+        
+    }
+    
+    func requestBridgePermssion(for configuration: Configuration, timer: Timer) {
+        
+        let url = "http://\(configuration.internalIpAddress)/api"
+        
+        request(
+            url,
+            method: .post,
+            parameters: ["devicetype": "com.corywilhite.SceneBuilder"],
+            encoding: JSONEncoding.default,
+            headers: nil
+            )
+            .responseJSON { (response) in
+                print(response)
+                
+                timer.invalidate()
+        }
+        
+    }
+    
+    static func findBridges() -> Task<[Configuration]> {
         
         let taskCompletion = TaskCompletionSource<[Configuration]>()
         
