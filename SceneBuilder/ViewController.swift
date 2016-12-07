@@ -18,11 +18,6 @@ func printConfiguration(fromConfigurations configurations: [BridgeManager.Config
     return configurations.first!
 }
 
-func setConfiguration(configuration: BridgeManager.Configuration) -> BridgeManager.Configuration {
-    BridgeManager.shared.selectBridge(configuration: configuration)
-    return configuration
-}
-
 func createUser(withUsername username: String) -> WhitelistUser {
     return WhitelistUser(name: username)
 }
@@ -59,7 +54,6 @@ class ViewController: UIViewController {
             
             BridgeManager.findBridges()
                 .continueOnSuccessWith(continuation: printConfiguration)
-                .continueOnSuccessWith(continuation: setConfiguration)
                 .continueOnSuccessWithTask(continuation: BridgePermissionManager.shared.startRequest)
                 .continueOnSuccessWith(continuation: createUser)
                 .continueOnSuccessWith(continuation: storeUser)

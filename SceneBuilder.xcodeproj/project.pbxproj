@@ -10,6 +10,7 @@
 		51EA2CF3F2707DDF5D79D29B /* Pods_SceneBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 599A797927A4F9283231AEC4 /* Pods_SceneBuilder.framework */; };
 		7602BB6B59FB953665FE6AB6 /* Pods_SceneBuilderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99168858EAA8E3FD38B9493C /* Pods_SceneBuilderTests.framework */; };
 		7AEE9D741DF7EB820038CBB5 /* BridgePermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEE9D731DF7EB820038CBB5 /* BridgePermissionManager.swift */; };
+		7AEE9D761DF7EBEC0038CBB5 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEE9D751DF7EBEC0038CBB5 /* Bridge.swift */; };
 		7AFAA5261DEE908D009BC953 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFAA5251DEE908D009BC953 /* AppDelegate.swift */; };
 		7AFAA5281DEE908D009BC953 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFAA5271DEE908D009BC953 /* ViewController.swift */; };
 		7AFAA52B1DEE908D009BC953 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAA5291DEE908D009BC953 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		2B4076207AB885198878C6D5 /* Pods-SceneBuilder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SceneBuilder.release.xcconfig"; path = "Pods/Target Support Files/Pods-SceneBuilder/Pods-SceneBuilder.release.xcconfig"; sourceTree = "<group>"; };
 		599A797927A4F9283231AEC4 /* Pods_SceneBuilder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SceneBuilder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AEE9D731DF7EB820038CBB5 /* BridgePermissionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgePermissionManager.swift; sourceTree = "<group>"; };
+		7AEE9D751DF7EBEC0038CBB5 /* Bridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
 		7AFAA5221DEE908D009BC953 /* SceneBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFAA5251DEE908D009BC953 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFAA5271DEE908D009BC953 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				7AFAA5461DEE9F23009BC953 /* BridgeManager.swift */,
 				7AEE9D731DF7EB820038CBB5 /* BridgePermissionManager.swift */,
+				7AEE9D751DF7EBEC0038CBB5 /* Bridge.swift */,
 			);
 			path = Hue;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AEE9D761DF7EBEC0038CBB5 /* Bridge.swift in Sources */,
 				7AFAA5281DEE908D009BC953 /* ViewController.swift in Sources */,
 				7AEE9D741DF7EB820038CBB5 /* BridgePermissionManager.swift in Sources */,
 				7AFAA5261DEE908D009BC953 /* AppDelegate.swift in Sources */,

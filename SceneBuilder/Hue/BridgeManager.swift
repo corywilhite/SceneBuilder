@@ -23,13 +23,19 @@ class BridgeManager {
     
     static let shared = BridgeManager()
     
-    private var currentConfiguration: Configuration?
-    
-    func selectBridge(configuration: Configuration) {
-        currentConfiguration = configuration
+    func getCurrentConfiguration(for bridgeConfiguration: Configuration, user: WhitelistUser) -> Task<Bridge> {
+        
+        let bridgeSource = TaskCompletionSource<Bridge>()
+        
+        request("http://\(bridgeConfiguration.internalIpAddress)/api/\(user.name)/config")
+            .responseJSON { (response) in
+                
+                print(response)
+                
+        }
+        
+        return bridgeSource.task
     }
-    
-    
     
     static func findBridges() -> Task<[Configuration]> {
         
