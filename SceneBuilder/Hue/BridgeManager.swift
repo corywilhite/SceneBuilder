@@ -31,13 +31,15 @@ class BridgeManager {
     
     func startBridgeRegistration(for configuration: Configuration) {
         
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { timer in
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { timer in
             
             self.requestBridgePermssion(for: configuration, timer: timer)
             
         }
         
     }
+    
+    var tries = 0
     
     func requestBridgePermssion(for configuration: Configuration, timer: Timer) {
         
@@ -53,7 +55,35 @@ class BridgeManager {
             .responseJSON { (response) in
                 print(response)
                 
-                timer.invalidate()
+                guard let rawResponse = response.result.value as? [[String: Any]],
+                    let responseDictionary = rawResponse.first else {
+                        print("unexpected response")
+                        timer.invalidate()
+                        return
+                }
+                
+                if let successDictionary = responseDictionary["success"] as? [String: Any],
+                    let username = successDictionary["username"] as? String {
+                    
+                    print("Retrieved Username: \(username)")
+                    timer.invalidate()
+                    return
+                    
+                } else if let errorDictionary = responseDictionary["error"] as? [String: Any],
+                    let errorDescription = errorDictionary["description"] as? String {
+                    
+                    print(errorDescription)
+                    
+                    if self.tries == 6 {
+                        print("invalidating timer")
+                        timer.invalidate()
+                    }
+                    
+                } else {
+                    print("didnt receive expected response type")
+                }
+                
+                self.tries += 1
         }
         
     }
