@@ -9,6 +9,7 @@ target 'SceneBuilder' do
   pod 'Alamofire', '~> 4.0'
   pod 'SnapKit', '~> 3.0'
   pod 'Bolts-Swift'
+  pod 'Pantry'
 
   target 'SceneBuilderTests' do
     inherit! :search_paths

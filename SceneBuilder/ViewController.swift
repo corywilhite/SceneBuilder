@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import BoltsSwift
+import Pantry
 
 func printConfiguration(fromConfigurations configurations: [BridgeManager.Configuration]) -> BridgeManager.Configuration {
     
@@ -22,18 +23,54 @@ func setConfiguration(configuration: BridgeManager.Configuration) -> BridgeManag
     return configuration
 }
 
+func createUser(withUsername username: String) -> WhitelistUser {
+    return WhitelistUser(name: username)
+}
+
+func getUser() -> WhitelistUser? {
+    return Pantry.unpack("whitelist-user")
+}
+
+func storeUser(_ user: WhitelistUser) {
+    Pantry.pack(user, key: "whitelist-user")
+}
+
+struct WhitelistUser: Storable {
+    let name: String
+    
+    init(name: String) {
+        self.name = name
+    }
+    
+    init?(warehouse: Warehouseable) {
+        guard let name: String = warehouse.get("name") else { return nil }
+        self.name = name
+    }
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        BridgeManager
-            .findBridges()
-            .continueOnSuccessWith(continuation: printConfiguration)
-            .continueOnSuccessWith(continuation: setConfiguration)
-            .continueOnSuccessWith(continuation: BridgeManager.shared.startBridgeRegistration)
+        if let user = getUser() {
+            print(user)
+        } else {
+            
+            BridgeManager.findBridges()
+                .continueOnSuccessWith(continuation: printConfiguration)
+                .continueOnSuccessWith(continuation: setConfiguration)
+                .continueOnSuccessWithTask(continuation: BridgePermissionManager.shared.startRequest)
+                .continueOnSuccessWith(continuation: createUser)
+                .continueOnSuccessWith(continuation: storeUser)
+            
+            
+        }
+        
+        
         
     }
-
+    
+    
 }
 

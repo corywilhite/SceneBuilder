@@ -1,18 +1,21 @@
 PODS:
   - Alamofire (4.2.0)
   - Bolts-Swift (1.3.0)
+  - Pantry (0.3)
   - SnapKit (3.0.2)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - Bolts-Swift
+  - Pantry
   - SnapKit (~> 3.0)
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
   Bolts-Swift: fa98d1b59fc1acea9b21a21306dcdca1c85e3737
+  Pantry: 98481849be65d2b2cb9658976533e84ebd266192
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
 
-PODFILE CHECKSUM: 5d385158e9d9b5085a7ecedfedd9611eeabcbced
+PODFILE CHECKSUM: c9a8e245f00c82a38aadc7c2c577da3fb2de05c2
 
 COCOAPODS: 1.1.1
