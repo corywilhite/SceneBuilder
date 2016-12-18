@@ -9,11 +9,17 @@
 import Foundation
 
 struct Bridge {
+    
+    struct Info {
+        let id: String
+        let internalIpAddress: String
+    }
+    
     let name: String
     let apiVersion: String
     let softwareVersion: String
     let proxyAddress: String
-    let proxyPort: String
+    let proxyPort: Int
     let macAddress: String
     let netMask: String
     let gateway: String
@@ -21,7 +27,7 @@ struct Bridge {
     let providesPortalServices: Bool
     let currentTimeUTC: String
     let localTime: String
-    let zigbeeChannel: String
+    let zigbeeChannel: Int
     let modelId: String
     let bridgeId: String
     let isFactoryNew: Bool
@@ -35,9 +41,9 @@ struct Bridge {
         self.softwareVersion = softwareVersion
         guard let proxyAddress = JSON["proxyaddress"] as? String else { return nil }
         self.proxyAddress = proxyAddress
-        guard let proxyPort = JSON["proxyport"] as? String else { return nil }
+        guard let proxyPort = JSON["proxyport"] as? Int else { return nil }
         self.proxyPort = proxyPort
-        guard let macAddress = JSON["macaddress"] as? String else { return nil }
+        guard let macAddress = JSON["mac"] as? String else { return nil }
         self.macAddress = macAddress
         guard let netMask = JSON["netmask"] as? String else { return nil }
         self.netMask = netMask
@@ -51,13 +57,13 @@ struct Bridge {
         self.currentTimeUTC = currentTimeUTC
         guard let localTime = JSON["localtime"] as? String else { return nil }
         self.localTime = localTime
-        guard let zigbeeChannel = JSON["zigbeechannel"] as? String else { return nil }
+        guard let zigbeeChannel = JSON["zigbeechannel"] as? Int else { return nil }
         self.zigbeeChannel = zigbeeChannel
         guard let modelId = JSON["modelid"] as? String else { return nil }
         self.modelId = modelId
         guard let bridgeId = JSON["bridgeid"] as? String else { return nil }
         self.bridgeId = bridgeId
-        guard let isFactoryNew = JSON["factorynew"] as? Bool else { return nil }
+        let isFactoryNew = JSON["factorynew"] as? Bool ?? false
         self.isFactoryNew = isFactoryNew
     }
 }

@@ -13,7 +13,7 @@ import Alamofire
 class BridgePermissionManager {
     static let shared = BridgePermissionManager()
     
-    func startRequest(with configuration: BridgeManager.Configuration) -> Task<String>{
+    func startRequest(with configuration: Bridge.Info) -> Task<String>{
         
         let usernameSource = TaskCompletionSource<String>()
         
@@ -35,7 +35,7 @@ class BridgePermissionManager {
         case timeout
     }
     
-    func startRequest(with configuration: BridgeManager.Configuration, timer: Timer) -> Task<String> {
+    func startRequest(with configuration: Bridge.Info, timer: Timer) -> Task<String> {
         
         let usernameSource = TaskCompletionSource<String>()
         

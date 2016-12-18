@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		51EA2CF3F2707DDF5D79D29B /* Pods_SceneBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 599A797927A4F9283231AEC4 /* Pods_SceneBuilder.framework */; };
 		7602BB6B59FB953665FE6AB6 /* Pods_SceneBuilderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99168858EAA8E3FD38B9493C /* Pods_SceneBuilderTests.framework */; };
+		7A29E8D31E0616150023198A /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A29E8D21E0616150023198A /* ViewController.xib */; };
+		7A29E8D51E0621D50023198A /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29E8D41E0621D50023198A /* Light.swift */; };
+		7A29E8D71E0624900023198A /* WhitelistUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29E8D61E0624900023198A /* WhitelistUser.swift */; };
+		7A29E8D91E0627320023198A /* HueAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29E8D81E0627320023198A /* HueAPI.swift */; };
 		7AEE9D741DF7EB820038CBB5 /* BridgePermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEE9D731DF7EB820038CBB5 /* BridgePermissionManager.swift */; };
 		7AEE9D761DF7EBEC0038CBB5 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEE9D751DF7EBEC0038CBB5 /* Bridge.swift */; };
 		7AFAA5261DEE908D009BC953 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFAA5251DEE908D009BC953 /* AppDelegate.swift */; };
 		7AFAA5281DEE908D009BC953 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFAA5271DEE908D009BC953 /* ViewController.swift */; };
-		7AFAA52B1DEE908D009BC953 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAA5291DEE908D009BC953 /* Main.storyboard */; };
 		7AFAA52D1DEE908D009BC953 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAA52C1DEE908D009BC953 /* Assets.xcassets */; };
 		7AFAA5301DEE908D009BC953 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7AFAA52E1DEE908D009BC953 /* LaunchScreen.storyboard */; };
 		7AFAA53B1DEE908D009BC953 /* SceneBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFAA53A1DEE908D009BC953 /* SceneBuilderTests.swift */; };
@@ -33,12 +36,15 @@
 /* Begin PBXFileReference section */
 		2B4076207AB885198878C6D5 /* Pods-SceneBuilder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SceneBuilder.release.xcconfig"; path = "Pods/Target Support Files/Pods-SceneBuilder/Pods-SceneBuilder.release.xcconfig"; sourceTree = "<group>"; };
 		599A797927A4F9283231AEC4 /* Pods_SceneBuilder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SceneBuilder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A29E8D21E0616150023198A /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		7A29E8D41E0621D50023198A /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
+		7A29E8D61E0624900023198A /* WhitelistUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitelistUser.swift; sourceTree = "<group>"; };
+		7A29E8D81E0627320023198A /* HueAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HueAPI.swift; sourceTree = "<group>"; };
 		7AEE9D731DF7EB820038CBB5 /* BridgePermissionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgePermissionManager.swift; sourceTree = "<group>"; };
 		7AEE9D751DF7EBEC0038CBB5 /* Bridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
 		7AFAA5221DEE908D009BC953 /* SceneBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AFAA5251DEE908D009BC953 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFAA5271DEE908D009BC953 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7AFAA52A1DEE908D009BC953 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7AFAA52C1DEE908D009BC953 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7AFAA52F1DEE908D009BC953 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7AFAA5311DEE908D009BC953 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,7 +104,7 @@
 				7AFAA5251DEE908D009BC953 /* AppDelegate.swift */,
 				7AFAA5451DEE9F13009BC953 /* Hue */,
 				7AFAA5271DEE908D009BC953 /* ViewController.swift */,
-				7AFAA5291DEE908D009BC953 /* Main.storyboard */,
+				7A29E8D21E0616150023198A /* ViewController.xib */,
 				7AFAA52C1DEE908D009BC953 /* Assets.xcassets */,
 				7AFAA52E1DEE908D009BC953 /* LaunchScreen.storyboard */,
 				7AFAA5311DEE908D009BC953 /* Info.plist */,
@@ -118,9 +124,12 @@
 		7AFAA5451DEE9F13009BC953 /* Hue */ = {
 			isa = PBXGroup;
 			children = (
+				7A29E8D81E0627320023198A /* HueAPI.swift */,
 				7AFAA5461DEE9F23009BC953 /* BridgeManager.swift */,
 				7AEE9D731DF7EB820038CBB5 /* BridgePermissionManager.swift */,
 				7AEE9D751DF7EBEC0038CBB5 /* Bridge.swift */,
+				7A29E8D41E0621D50023198A /* Light.swift */,
+				7A29E8D61E0624900023198A /* WhitelistUser.swift */,
 			);
 			path = Hue;
 			sourceTree = "<group>";
@@ -237,8 +246,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7AFAA5301DEE908D009BC953 /* LaunchScreen.storyboard in Resources */,
+				7A29E8D31E0616150023198A /* ViewController.xib in Resources */,
 				7AFAA52D1DEE908D009BC953 /* Assets.xcassets in Resources */,
-				7AFAA52B1DEE908D009BC953 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,10 +358,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A29E8D51E0621D50023198A /* Light.swift in Sources */,
 				7AEE9D761DF7EBEC0038CBB5 /* Bridge.swift in Sources */,
 				7AFAA5281DEE908D009BC953 /* ViewController.swift in Sources */,
+				7A29E8D91E0627320023198A /* HueAPI.swift in Sources */,
 				7AEE9D741DF7EB820038CBB5 /* BridgePermissionManager.swift in Sources */,
 				7AFAA5261DEE908D009BC953 /* AppDelegate.swift in Sources */,
+				7A29E8D71E0624900023198A /* WhitelistUser.swift in Sources */,
 				7AFAA5471DEE9F23009BC953 /* BridgeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,14 +388,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7AFAA5291DEE908D009BC953 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7AFAA52A1DEE908D009BC953 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7AFAA52E1DEE908D009BC953 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -499,6 +503,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.corywilhite.SceneBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -513,6 +518,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.corywilhite.SceneBuilder;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

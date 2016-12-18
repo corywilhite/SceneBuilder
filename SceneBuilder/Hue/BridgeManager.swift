@@ -12,34 +12,44 @@ import Alamofire
 
 class BridgeManager {
     
-    struct Configuration {
-        let id: String
-        let internalIpAddress: String
-    }
-    
     enum BridgeDiscoveryError: Error {
         case valueNotFound
     }
     
+    enum BridgeParsingError: Error {
+        case typeCastFailed
+        case failedToCreateBridge
+    }
+    
     static let shared = BridgeManager()
     
-    func getCurrentConfiguration(for bridgeConfiguration: Configuration, user: WhitelistUser) -> Task<Bridge> {
+    static func getBridge(for configuration: Bridge.Info, user: WhitelistUser) -> Task<Bridge> {
         
         let bridgeSource = TaskCompletionSource<Bridge>()
         
-        request("http://\(bridgeConfiguration.internalIpAddress)/api/\(user.name)/config")
+        request("http://\(configuration.internalIpAddress)/api/\(user.name)/config")
             .responseJSON { (response) in
                 
-                print(response)
+                guard let JSON = response.result.value as? [String: Any] else {
+                    bridgeSource.set(error: BridgeParsingError.typeCastFailed)
+                    return
+                }
+                
+                guard let bridge = Bridge(JSON: JSON) else {
+                    bridgeSource.set(error: BridgeParsingError.failedToCreateBridge)
+                    return
+                }
+                
+                bridgeSource.set(result: bridge)
                 
         }
         
         return bridgeSource.task
     }
     
-    static func findBridges() -> Task<[Configuration]> {
+    static func findBridges() -> Task<[Bridge.Info]> {
         
-        let taskCompletion = TaskCompletionSource<[Configuration]>()
+        let taskCompletion = TaskCompletionSource<[Bridge.Info]>()
         
         let upnpEndpoint = "https://www.meethue.com/api/nupnp"
         
@@ -55,7 +65,7 @@ class BridgeManager {
                     return
                 }
                 
-                var configs: [Configuration] = []
+                var configs: [Bridge.Info] = []
                 
                 for bridge in bridges {
                     
@@ -68,7 +78,7 @@ class BridgeManager {
                     }
                     
                     configs.append(
-                        Configuration(
+                        Bridge.Info(
                             id: id,
                             internalIpAddress: ipAddress
                         )

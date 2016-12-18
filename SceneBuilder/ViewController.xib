@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController" customModule="SceneBuilder" customModuleProvider="target">
+            <connections>
+                <outlet property="connectedLabel" destination="W7I-09-8DV" id="vuY-0b-kBp"/>
+                <outlet property="connectedStatusLabel" destination="eCV-QA-1Ni" id="RNr-0G-eR4"/>
+                <outlet property="startScanButton" destination="SbP-pB-ABQ" id="xUQ-CN-CT6"/>
+                <outlet property="view" destination="iN0-l3-epB" id="Tb0-Bq-A8l"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SbP-pB-ABQ">
+                    <rect key="frame" x="398.5" y="348" width="227" height="72"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                    <state key="normal" title="Start Scan"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connected:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W7I-09-8DV">
+                    <rect key="frame" x="398" y="428" width="89" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="False" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCV-QA-1Ni">
+                    <rect key="frame" x="491" y="428" width="39.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="W7I-09-8DV" firstAttribute="top" secondItem="SbP-pB-ABQ" secondAttribute="bottom" constant="8" id="HI8-2r-vZ9"/>
+                <constraint firstItem="SbP-pB-ABQ" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Jw0-9K-cTx"/>
+                <constraint firstItem="W7I-09-8DV" firstAttribute="leading" secondItem="SbP-pB-ABQ" secondAttribute="leading" id="N2m-Cj-Chx"/>
+                <constraint firstItem="eCV-QA-1Ni" firstAttribute="leading" secondItem="W7I-09-8DV" secondAttribute="trailing" constant="4" id="eAs-BB-Yd0"/>
+                <constraint firstItem="SbP-pB-ABQ" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="jzs-N9-kVq"/>
+                <constraint firstItem="eCV-QA-1Ni" firstAttribute="baseline" secondItem="W7I-09-8DV" secondAttribute="baseline" id="r1q-OE-THC"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
