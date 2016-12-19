@@ -33,25 +33,27 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         getBridgeIfNeeded()
-        
     }
     
     func getBridgeIfNeeded() {
         
         if let user = WhitelistUser.get() {
-            dump(user)
-            
-            BridgeManager
-                .findBridges()
-                .continueOnSuccessWith(continuation: { $0.first! } )
-                .continueOnSuccessWith(continuation: { HueAPI.init(configuration: $0, user: user) })
-                .continueOnSuccessWithTask(continuation: { $0.getLights() })
-                
-            
             
             setConnected(true)
+            
+            dump(user)
+            
+            let lightsController = LightsViewController(user: user)
+            
+            present(lightsController, animated: true, completion: nil)
+            
+            
         } else {
             setConnected(false)
         }

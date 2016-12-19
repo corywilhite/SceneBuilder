@@ -41,7 +41,17 @@ struct HueAPI {
                     return
                 }
                 
-                let lights = JSON.flatMap { Light(id: $0.key, JSON: $0.value as? [String: Any] ?? [:]) }
+                let lightsWithIds: [[String: Any]] = JSON.flatMap {
+                    var json = $0.value as? [String: Any]
+                    json?["id"] = $0.key
+                    return json
+                }
+                
+                let lights: [Light] = lightsWithIds.flatMap {
+                    let dict = NSDictionary(dictionary: $0)
+                    let light = Light.from(dict)
+                    return light
+                }.sorted()
                 
                 dump(lights)
                 

@@ -10,6 +10,7 @@ target 'SceneBuilder' do
   pod 'SnapKit', '~> 3.0'
   pod 'Bolts-Swift'
   pod 'Pantry'
+  pod 'ModelMapper'
 
   target 'SceneBuilderTests' do
     inherit! :search_paths

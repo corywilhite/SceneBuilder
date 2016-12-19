@@ -13,6 +13,9 @@
 		7A29E8D51E0621D50023198A /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29E8D41E0621D50023198A /* Light.swift */; };
 		7A29E8D71E0624900023198A /* WhitelistUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29E8D61E0624900023198A /* WhitelistUser.swift */; };
 		7A29E8D91E0627320023198A /* HueAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29E8D81E0627320023198A /* HueAPI.swift */; };
+		7A29E8DB1E075FBE0023198A /* LightsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29E8DA1E075FBE0023198A /* LightsViewController.swift */; };
+		7A29E8DD1E0761ED0023198A /* LightsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A29E8DC1E0761ED0023198A /* LightsViewController.xib */; };
+		7A29E8DF1E076E020023198A /* LightCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A29E8DE1E076E020023198A /* LightCollectionViewCell.xib */; };
 		7AEE9D741DF7EB820038CBB5 /* BridgePermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEE9D731DF7EB820038CBB5 /* BridgePermissionManager.swift */; };
 		7AEE9D761DF7EBEC0038CBB5 /* Bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEE9D751DF7EBEC0038CBB5 /* Bridge.swift */; };
 		7AFAA5261DEE908D009BC953 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AFAA5251DEE908D009BC953 /* AppDelegate.swift */; };
@@ -40,6 +43,9 @@
 		7A29E8D41E0621D50023198A /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		7A29E8D61E0624900023198A /* WhitelistUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitelistUser.swift; sourceTree = "<group>"; };
 		7A29E8D81E0627320023198A /* HueAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HueAPI.swift; sourceTree = "<group>"; };
+		7A29E8DA1E075FBE0023198A /* LightsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightsViewController.swift; sourceTree = "<group>"; };
+		7A29E8DC1E0761ED0023198A /* LightsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LightsViewController.xib; sourceTree = "<group>"; };
+		7A29E8DE1E076E020023198A /* LightCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LightCollectionViewCell.xib; sourceTree = "<group>"; };
 		7AEE9D731DF7EB820038CBB5 /* BridgePermissionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BridgePermissionManager.swift; sourceTree = "<group>"; };
 		7AEE9D751DF7EBEC0038CBB5 /* Bridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bridge.swift; sourceTree = "<group>"; };
 		7AFAA5221DEE908D009BC953 /* SceneBuilder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SceneBuilder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +111,9 @@
 				7AFAA5451DEE9F13009BC953 /* Hue */,
 				7AFAA5271DEE908D009BC953 /* ViewController.swift */,
 				7A29E8D21E0616150023198A /* ViewController.xib */,
+				7A29E8DA1E075FBE0023198A /* LightsViewController.swift */,
+				7A29E8DC1E0761ED0023198A /* LightsViewController.xib */,
+				7A29E8DE1E076E020023198A /* LightCollectionViewCell.xib */,
 				7AFAA52C1DEE908D009BC953 /* Assets.xcassets */,
 				7AFAA52E1DEE908D009BC953 /* LaunchScreen.storyboard */,
 				7AFAA5311DEE908D009BC953 /* Info.plist */,
@@ -245,9 +254,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A29E8DF1E076E020023198A /* LightCollectionViewCell.xib in Resources */,
 				7AFAA5301DEE908D009BC953 /* LaunchScreen.storyboard in Resources */,
 				7A29E8D31E0616150023198A /* ViewController.xib in Resources */,
 				7AFAA52D1DEE908D009BC953 /* Assets.xcassets in Resources */,
+				7A29E8DD1E0761ED0023198A /* LightsViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A29E8DB1E075FBE0023198A /* LightsViewController.swift in Sources */,
 				7A29E8D51E0621D50023198A /* Light.swift in Sources */,
 				7AEE9D761DF7EBEC0038CBB5 /* Bridge.swift in Sources */,
 				7AFAA5281DEE908D009BC953 /* ViewController.swift in Sources */,
