@@ -8,8 +8,10 @@
 
 import UIKit
 
+
+
 protocol LightCollectionCellDelegate: class {
-    func didPressOnOff(button: UIButton, for cell: LightCollectionViewCell)
+    func didToggleOnOff(switch: ViralSwitch, for cell: LightCollectionViewCell)
 }
 
 class LightCollectionViewCell: UICollectionViewCell {
@@ -27,31 +29,30 @@ class LightCollectionViewCell: UICollectionViewCell {
             brightnessLabel.textColor = .white
         }
     }
-    @IBOutlet weak var onOffButton: UIButton! {
+    @IBOutlet weak var onOffSwitch: ViralSwitch! {
         didSet {
-            onOffButton.setTitleColor(.white, for: .normal)
-            onOffButton.addTarget(self, action: #selector(onOffButtonPressed(sender:)), for: .touchUpInside)
+            
+            onOffSwitch.addTarget(self, action: #selector(onOffSwitchToggled(sender:)), for: .valueChanged)
         }
     }
     
     func configure(light: Light) {
         titleLabel.text = light.name
-        backgroundColor = light.state.isOn ? ColorUtility.color(
+        backgroundColor = .lightGray
+        
+        brightnessLabel.text = "\(light.state.brightness)"
+        
+        onOffSwitch.onTintColor = ColorUtility.color(
             from: light.state.colorspaceCoordinate,
             brightness: light.state.brightness,
             model: light.modelId
-        ) : .black
+        )
         
-        brightnessLabel.text = "\(light.state.brightness)"
-        onOffButton.setTitle(light.state.isOn ? "On" : "Off", for: .normal)
-        onOffButton.isSelected = light.state.isOn
+        onOffSwitch.isOn = light.state.isOn
     }
     
-    func onOffButtonPressed(sender: UIButton) {
-        
-        sender.isSelected = !sender.isSelected
-        
-        delegate?.didPressOnOff(button: sender, for: self)
+    func onOffSwitchToggled(sender: ViralSwitch) {
+        delegate?.didToggleOnOff(switch: sender, for: self)
     }
     
     class var identifier: String {
@@ -131,12 +132,12 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     // MARK: - LightCollectionCellDelegate
     
-    func didPressOnOff(button: UIButton, for cell: LightCollectionViewCell) {
+    func didToggleOnOff(switch: ViralSwitch, for cell: LightCollectionViewCell) {
         
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         let light = lights[indexPath.item]
         
-        let task = button.isSelected ? self.api?.turnOn(light: light) : self.api?.turnOff(light: light)
+        let task = `switch`.isOn ? self.api?.turnOn(light: light) : self.api?.turnOff(light: light)
         
         task?.continueOnSuccessWith(continuation: {
             print("success")

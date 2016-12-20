@@ -30,24 +30,24 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAB-7o-AL8" userLabel="on-button">
-                        <rect key="frame" x="192" y="8" width="46" height="30"/>
-                        <state key="normal" title="Button"/>
-                    </button>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yhc-My-Vd4" customClass="ViralSwitch" customModule="SceneBuilder" customModuleProvider="target">
+                        <rect key="frame" x="189" y="8" width="51" height="31"/>
+                        <color key="onTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </switch>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="68o-Rq-Vkj" firstAttribute="top" secondItem="VhD-dS-0D2" secondAttribute="bottom" constant="8" id="6Qz-bY-4bj"/>
                 <constraint firstItem="VhD-dS-0D2" firstAttribute="leading" secondItem="w0n-g5-meF" secondAttribute="leading" constant="8" id="CKM-98-AuZ"/>
-                <constraint firstAttribute="trailing" secondItem="gAB-7o-AL8" secondAttribute="trailing" constant="8" id="JrD-AK-f8Y"/>
+                <constraint firstAttribute="trailing" secondItem="yhc-My-Vd4" secondAttribute="trailing" constant="8" id="GHD-af-Kfh"/>
                 <constraint firstItem="68o-Rq-Vkj" firstAttribute="leading" secondItem="w0n-g5-meF" secondAttribute="leading" constant="8" id="UQa-LP-jFv"/>
-                <constraint firstItem="gAB-7o-AL8" firstAttribute="top" secondItem="w0n-g5-meF" secondAttribute="top" constant="8" id="b67-Eh-1VZ"/>
                 <constraint firstItem="VhD-dS-0D2" firstAttribute="top" secondItem="w0n-g5-meF" secondAttribute="top" constant="8" id="iLg-be-Yn1"/>
+                <constraint firstItem="yhc-My-Vd4" firstAttribute="top" secondItem="w0n-g5-meF" secondAttribute="top" constant="8" id="zxF-8s-ciU"/>
             </constraints>
             <size key="customSize" width="246" height="133"/>
             <connections>
                 <outlet property="brightnessLabel" destination="68o-Rq-Vkj" id="h1z-mQ-oXT"/>
-                <outlet property="onOffButton" destination="gAB-7o-AL8" id="lMD-lK-PgU"/>
+                <outlet property="onOffSwitch" destination="yhc-My-Vd4" id="unR-xD-EBV"/>
                 <outlet property="titleLabel" destination="VhD-dS-0D2" id="zYh-SH-cPk"/>
             </connections>
             <point key="canvasLocation" x="-16" y="-42.5"/>
