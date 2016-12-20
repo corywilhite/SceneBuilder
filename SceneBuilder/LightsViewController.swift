@@ -8,17 +8,50 @@
 
 import UIKit
 
+protocol LightCollectionCellDelegate: class {
+    func didPressOnOff(button: UIButton, for cell: LightCollectionViewCell)
+}
+
 class LightCollectionViewCell: UICollectionViewCell {
+
+    weak var delegate: LightCollectionCellDelegate?
     
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        didSet {
+            titleLabel.textColor = .white
+        }
+    }
+    
+    @IBOutlet weak var brightnessLabel: UILabel! {
+        didSet {
+            brightnessLabel.textColor = .white
+        }
+    }
+    @IBOutlet weak var onOffButton: UIButton! {
+        didSet {
+            onOffButton.setTitleColor(.white, for: .normal)
+            onOffButton.addTarget(self, action: #selector(onOffButtonPressed(sender:)), for: .touchUpInside)
+        }
+    }
     
     func configure(light: Light) {
         titleLabel.text = light.name
-        backgroundColor = ColorUtility.color(
+        backgroundColor = light.state.isOn ? ColorUtility.color(
             from: light.state.colorspaceCoordinate,
             brightness: light.state.brightness,
             model: light.modelId
-        )
+        ) : .black
+        
+        brightnessLabel.text = "\(light.state.brightness)"
+        onOffButton.setTitle(light.state.isOn ? "On" : "Off", for: .normal)
+        onOffButton.isSelected = light.state.isOn
+    }
+    
+    func onOffButtonPressed(sender: UIButton) {
+        
+        sender.isSelected = !sender.isSelected
+        
+        delegate?.didPressOnOff(button: sender, for: self)
     }
     
     class var identifier: String {
@@ -30,7 +63,7 @@ class LightCollectionViewCell: UICollectionViewCell {
     }
 }
 
-class LightsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class LightsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, LightCollectionCellDelegate {
     
     let user: WhitelistUser
     var lights: [Light] = [] {
@@ -47,6 +80,8 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
         }
     }
     
+    var api: HueAPI?
+    
     init(user: WhitelistUser) {
         self.user = user
         super.init(nibName: nil, bundle: nil)
@@ -62,13 +97,19 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
         BridgeManager
             .findBridges()
             .continueOnSuccessWith(continuation: { $0.first! } )
-            .continueOnSuccessWith(continuation: { HueAPI.init(configuration: $0, user: self.user) })
+            .continueOnSuccessWith(continuation: { info -> HueAPI in
+                let newAPI = HueAPI(configuration: info, user: self.user)
+                self.api = newAPI
+                return newAPI
+            })
             .continueOnSuccessWithTask(continuation: { $0.getLights() })
             .continueOnSuccessWith { (lights) -> Void in
                 self.lights = lights
         }
         
     }
+    
+    // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return lights.count
@@ -78,8 +119,28 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LightCollectionViewCell.identifier, for: indexPath) as! LightCollectionViewCell
         let light = lights[indexPath.item]
         cell.configure(light: light)
-        
+        cell.delegate = self
         return cell
+    }
+    
+    // MARK: - UICollectionViewDelegateFlowLayout
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 300, height: 150)
+    }
+    
+    // MARK: - LightCollectionCellDelegate
+    
+    func didPressOnOff(button: UIButton, for cell: LightCollectionViewCell) {
+        
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        let light = lights[indexPath.item]
+        
+        let task = button.isSelected ? self.api?.turnOn(light: light) : self.api?.turnOff(light: light)
+        
+        task?.continueOnSuccessWith(continuation: {
+            print("success")
+        })
     }
     
 }

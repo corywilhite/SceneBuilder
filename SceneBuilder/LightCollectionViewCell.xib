@@ -18,20 +18,36 @@
                 <rect key="frame" x="0.0" y="0.0" width="246" height="133"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhD-dS-0D2">
-                        <rect key="frame" x="102" y="56" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhD-dS-0D2" userLabel="title-label">
+                        <rect key="frame" x="8" y="8" width="66.5" height="33.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68o-Rq-Vkj" userLabel="brightness-label">
+                        <rect key="frame" x="8" y="49.5" width="42" height="20.5"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAB-7o-AL8" userLabel="on-button">
+                        <rect key="frame" x="192" y="8" width="46" height="30"/>
+                        <state key="normal" title="Button"/>
+                    </button>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="VhD-dS-0D2" firstAttribute="centerX" secondItem="w0n-g5-meF" secondAttribute="centerX" id="4v9-0c-1fP"/>
-                <constraint firstItem="VhD-dS-0D2" firstAttribute="centerY" secondItem="w0n-g5-meF" secondAttribute="centerY" id="fx4-Fa-tKv"/>
+                <constraint firstItem="68o-Rq-Vkj" firstAttribute="top" secondItem="VhD-dS-0D2" secondAttribute="bottom" constant="8" id="6Qz-bY-4bj"/>
+                <constraint firstItem="VhD-dS-0D2" firstAttribute="leading" secondItem="w0n-g5-meF" secondAttribute="leading" constant="8" id="CKM-98-AuZ"/>
+                <constraint firstAttribute="trailing" secondItem="gAB-7o-AL8" secondAttribute="trailing" constant="8" id="JrD-AK-f8Y"/>
+                <constraint firstItem="68o-Rq-Vkj" firstAttribute="leading" secondItem="w0n-g5-meF" secondAttribute="leading" constant="8" id="UQa-LP-jFv"/>
+                <constraint firstItem="gAB-7o-AL8" firstAttribute="top" secondItem="w0n-g5-meF" secondAttribute="top" constant="8" id="b67-Eh-1VZ"/>
+                <constraint firstItem="VhD-dS-0D2" firstAttribute="top" secondItem="w0n-g5-meF" secondAttribute="top" constant="8" id="iLg-be-Yn1"/>
             </constraints>
             <size key="customSize" width="246" height="133"/>
             <connections>
+                <outlet property="brightnessLabel" destination="68o-Rq-Vkj" id="h1z-mQ-oXT"/>
+                <outlet property="onOffButton" destination="gAB-7o-AL8" id="lMD-lK-PgU"/>
                 <outlet property="titleLabel" destination="VhD-dS-0D2" id="zYh-SH-cPk"/>
             </connections>
             <point key="canvasLocation" x="-16" y="-42.5"/>

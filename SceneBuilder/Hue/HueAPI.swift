@@ -60,4 +60,34 @@ struct HueAPI {
         
         return lightSource.task
     }
+    
+    func turnOn(light: Light) -> Task<Void> {
+        return update(light: light, with: ["on": true])
+    }
+    
+    func turnOff(light: Light) -> Task<Void> {
+        return update(light: light, with: ["on": false])
+    }
+    
+    func update(light: Light, with state: [String: Any]) -> Task<Void> {
+        
+        let updateSource = TaskCompletionSource<Void>()
+        
+        let url = baseURL() + "/lights/\(light.id)/state"
+        
+        request(
+            url,
+            method: .put,
+            parameters: state, 
+            encoding: JSONEncoding.default
+        )
+            .validate(statusCode: 200...299)
+            .responseJSON { (response) in
+                
+                updateSource.set(result: ())
+                dump(response)
+        }
+        
+        return updateSource.task
+    }
 }
