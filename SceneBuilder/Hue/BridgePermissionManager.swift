@@ -41,10 +41,14 @@ class BridgePermissionManager {
         
         let url = "http://\(configuration.internalIpAddress)/api"
         
+        let sanitizedDeviceName = UIDevice.current.name.replacingOccurrences(of: " ", with: "#").lowercased().data(using: .ascii, allowLossyConversion: true)
+            .flatMap { String(data: $0, encoding: .utf8) }
+            .flatMap { $0.replacingOccurrences(of: "?", with: "") } ?? "default"
+        
         request(
             url,
             method: .post,
-            parameters: ["devicetype": "com.corywilhite.SceneBuilder"],
+            parameters: ["devicetype": "SceneBuilder.\(sanitizedDeviceName)"],
             encoding: JSONEncoding.default,
             headers: nil
             )

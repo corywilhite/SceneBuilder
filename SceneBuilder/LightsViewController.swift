@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol LightCollectionCellDelegate: class {
-    func didToggleOnOff(switch: ViralSwitch, for cell: LightCollectionViewCell)
+    func didToggleOnOff(lightSwitch: UISwitch, for cell: LightCollectionViewCell)
 }
 
 class LightCollectionViewCell: UICollectionViewCell {
@@ -29,30 +29,25 @@ class LightCollectionViewCell: UICollectionViewCell {
             brightnessLabel.textColor = .white
         }
     }
-    @IBOutlet weak var onOffSwitch: ViralSwitch! {
+    @IBOutlet weak var onOffSwitch: UISwitch! {
         didSet {
-            
             onOffSwitch.addTarget(self, action: #selector(onOffSwitchToggled(sender:)), for: .valueChanged)
         }
     }
     
     func configure(light: Light) {
         titleLabel.text = light.name
-        backgroundColor = .lightGray
+        backgroundColor = light.state.isOn ? light.currentColor : .lightGray
         
         brightnessLabel.text = "\(light.state.brightness)"
         
-        onOffSwitch.onTintColor = ColorUtility.color(
-            from: light.state.colorspaceCoordinate,
-            brightness: light.state.brightness,
-            model: light.modelId
-        )
+        onOffSwitch.onTintColor = .green
         
         onOffSwitch.isOn = light.state.isOn
     }
     
-    func onOffSwitchToggled(sender: ViralSwitch) {
-        delegate?.didToggleOnOff(switch: sender, for: self)
+    func onOffSwitchToggled(sender: UISwitch) {
+        delegate?.didToggleOnOff(lightSwitch: sender, for: self)
     }
     
     class var identifier: String {
@@ -66,12 +61,7 @@ class LightCollectionViewCell: UICollectionViewCell {
 
 class LightsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, LightCollectionCellDelegate {
     
-    let user: WhitelistUser
-    var lights: [Light] = [] {
-        didSet {
-            collectionView.reloadData()
-        }
-    }
+    var lights: [Light] = []
     
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
@@ -81,10 +71,10 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
         }
     }
     
-    var api: HueAPI?
+    let api: HueAPI
     
-    init(user: WhitelistUser) {
-        self.user = user
+    init(api: HueAPI) {
+        self.api = api
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -95,17 +85,9 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        BridgeManager
-            .findBridges()
-            .continueOnSuccessWith(continuation: { $0.first! } )
-            .continueOnSuccessWith(continuation: { info -> HueAPI in
-                let newAPI = HueAPI(configuration: info, user: self.user)
-                self.api = newAPI
-                return newAPI
-            })
-            .continueOnSuccessWithTask(continuation: { $0.getLights() })
-            .continueOnSuccessWith { (lights) -> Void in
-                self.lights = lights
+        self.api.getLights().continueOnSuccessWith { [weak self] (lights) -> Void in
+            self?.lights = lights
+            self?.collectionView.reloadData()
         }
         
     }
@@ -132,16 +114,32 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     // MARK: - LightCollectionCellDelegate
     
-    func didToggleOnOff(switch: ViralSwitch, for cell: LightCollectionViewCell) {
+    func didToggleOnOff(lightSwitch: UISwitch, for cell: LightCollectionViewCell) {
         
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         let light = lights[indexPath.item]
         
-        let task = `switch`.isOn ? self.api?.turnOn(light: light) : self.api?.turnOff(light: light)
+        let animateTo: UIColor
         
-        task?.continueOnSuccessWith(continuation: {
-            print("success")
-        })
+        if lightSwitch.isOn {
+            animateTo = light.currentColor
+        } else {
+            animateTo = .lightGray
+        }
+        
+        UIView.animate(withDuration: 1) {
+            cell.backgroundColor = animateTo
+        }
+        
+        let task = lightSwitch.isOn ? self.api.turnOn(light: light) : self.api.turnOff(light: light)
+        
+        task.continueOnSuccessWithTask {
+            return self.api.getState(light: light)
+        }.continueOnSuccessWith { [weak self] light in
+            
+            self?.lights[indexPath.item] = light
+            
+        }
     }
     
 }

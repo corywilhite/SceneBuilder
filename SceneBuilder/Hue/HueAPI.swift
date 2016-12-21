@@ -85,9 +85,38 @@ struct HueAPI {
             .responseJSON { (response) in
                 
                 updateSource.set(result: ())
-                dump(response)
+                print("success")
         }
         
         return updateSource.task
+    }
+    
+    func getState(light: Light) -> Task<Light> {
+        
+        let lightSource = TaskCompletionSource<Light>()
+        
+        let url = baseURL() + "/lights/\(light.id)"
+        
+        request(url).validate(statusCode: 200...299).responseJSON { (response) in
+            
+            guard var JSON = response.result.value as? [String: Any] else {
+                lightSource.set(error: ParsingError.jsonSerializationFailed)
+                return
+            }
+            
+            JSON["id"] = light.id
+            
+            let dictionary = NSDictionary(dictionary: JSON)
+            
+            guard let light = Light.from(dictionary) else {
+                lightSource.set(error: ParsingError.jsonSerializationFailed)
+                return
+            }
+            
+            lightSource.set(result: light)
+            
+        }
+        
+        return lightSource.task
     }
 }

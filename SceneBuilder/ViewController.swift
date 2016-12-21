@@ -49,10 +49,17 @@ class ViewController: UIViewController {
             
             dump(user)
             
-            let lightsController = LightsViewController(user: user)
-            
-            present(lightsController, animated: true, completion: nil)
-            
+            BridgeManager
+                .findBridges()
+                .continueOnSuccessWith(continuation: { $0.first! })
+                .continueOnSuccessWith { [weak self] in
+                    
+                    let api = HueAPI(configuration: $0, user: user)
+                    
+                    let lightsController = LightsViewController(api: api)
+                    
+                    self?.present(lightsController, animated: true, completion: nil)
+            }
             
         } else {
             setConnected(false)
