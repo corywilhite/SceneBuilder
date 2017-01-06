@@ -7,11 +7,20 @@
 //
 
 import UIKit
-
+import BoltsSwift
 
 
 protocol LightCollectionCellDelegate: class {
     func didToggleOnOff(lightSwitch: UISwitch, for cell: LightCollectionViewCell)
+    func didBeginChangingBrightness(for cell: LightCollectionViewCell)
+    func didChangeBrightness(value: Float, for cell: LightCollectionViewCell)
+    func didEndChangingBrightness(for cell: LightCollectionViewCell)
+}
+
+private extension UISlider {
+    var floorValue: Float {
+        return floor(value)
+    }
 }
 
 class LightCollectionViewCell: UICollectionViewCell {
@@ -34,13 +43,23 @@ class LightCollectionViewCell: UICollectionViewCell {
             onOffSwitch.addTarget(self, action: #selector(onOffSwitchToggled(sender:)), for: .valueChanged)
         }
     }
+    @IBOutlet weak var brightnessSlider: UISlider! {
+        didSet {
+            brightnessSlider.addTarget(self, action: #selector(brightnessSliderDidBeginValueChange(sender:)), for: .touchDown)
+            brightnessSlider.addTarget(self, action: #selector(brightnessSliderValueChanged(sender:)), for: .valueChanged)
+            brightnessSlider.addTarget(self, action: #selector(brightnessSliderDidEndValueChange(sender:)), for: [.touchUpInside, .touchUpOutside, .touchCancel])
+            brightnessSlider.minimumValue = 0
+            brightnessSlider.maximumValue = 254
+            
+        }
+    }
     
     func configure(light: Light) {
         titleLabel.text = light.name
         backgroundColor = light.state.isOn ? light.currentColor : .lightGray
         
         brightnessLabel.text = "\(light.state.brightness)"
-        
+        brightnessSlider.value = Float(light.state.brightness)
         onOffSwitch.onTintColor = .green
         
         onOffSwitch.isOn = light.state.isOn
@@ -48,6 +67,19 @@ class LightCollectionViewCell: UICollectionViewCell {
     
     func onOffSwitchToggled(sender: UISwitch) {
         delegate?.didToggleOnOff(lightSwitch: sender, for: self)
+    }
+    
+    func brightnessSliderDidBeginValueChange(sender: UISlider) {
+        delegate?.didBeginChangingBrightness(for: self)
+    }
+    
+    func brightnessSliderDidEndValueChange(sender: UISlider) {
+        delegate?.didEndChangingBrightness(for: self)
+    }
+    
+    func brightnessSliderValueChanged(sender: UISlider) {
+        brightnessLabel.text = "\(sender.floorValue)"
+        delegate?.didChangeBrightness(value: sender.floorValue, for: self)
     }
     
     class var identifier: String {
@@ -131,15 +163,41 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
             cell.backgroundColor = animateTo
         }
         
-        let task = lightSwitch.isOn ? self.api.turnOn(light: light) : self.api.turnOff(light: light)
+        let task = lightSwitch.isOn ? api.turnOn(light: light) : api.turnOff(light: light)
         
-        task.continueOnSuccessWithTask {
-            return self.api.getState(light: light)
-        }.continueOnSuccessWith { [weak self] light in
-            
-            self?.lights[indexPath.item] = light
-            
+        update(light: light, at: indexPath, with: api, after: task)
+    }
+    
+    func didBeginChangingBrightness(for cell: LightCollectionViewCell) {
+        print("begin")
+    }
+    
+    func didChangeBrightness(value: Float, for cell: LightCollectionViewCell) {
+        print("changed to: \(value)")
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        let light = lights[indexPath.item]
+        
+        api.changeBrightness(for: light, to: Int(value)).continueOnSuccessWith {
+            print("changed \(light)")
         }
+    }
+    
+    func update<T>(light: Light, at indexPath: IndexPath, with api: HueAPI, after task: Task<T>) {
+        task.continueOnSuccessWithTask { _ in
+            return api.getState(light: light)
+        }.continueOnSuccessWith { [weak self] light in
+                self?.lights[indexPath.item] = light
+        }
+    }
+    
+    func didEndChangingBrightness(for cell: LightCollectionViewCell) {
+        
+        guard let indexPath = collectionView.indexPath(for: cell) else { return }
+        let light = lights[indexPath.item]
+        
+        update(light: light, at: indexPath, with: api, after: Task({}))
+        
+        print("ended")
     }
     
 }

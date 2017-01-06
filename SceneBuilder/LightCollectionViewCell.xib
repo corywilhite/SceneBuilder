@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="w0n-g5-meF" customClass="LightCollectionViewCell" customModule="SceneBuilder" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="246" height="133"/>
+            <rect key="frame" x="0.0" y="0.0" width="425" height="190"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="246" height="133"/>
+                <rect key="frame" x="0.0" y="0.0" width="425" height="190"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhD-dS-0D2" userLabel="title-label">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VhD-dS-0D2" userLabel="title-label">
                         <rect key="frame" x="8" y="8" width="66.5" height="33.5"/>
                         <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                         <nil key="textColor"/>
@@ -30,27 +30,35 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yhc-My-Vd4">
-                        <rect key="frame" x="189" y="8" width="51" height="31"/>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yhc-My-Vd4">
+                        <rect key="frame" x="368" y="8" width="51" height="31"/>
                         <color key="onTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </switch>
+                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="tWQ-bj-BlM">
+                        <rect key="frame" x="6" y="152" width="413" height="31"/>
+                    </slider>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="tWQ-bj-BlM" secondAttribute="bottom" constant="8" id="2bd-6X-W4V"/>
                 <constraint firstItem="68o-Rq-Vkj" firstAttribute="top" secondItem="VhD-dS-0D2" secondAttribute="bottom" constant="8" id="6Qz-bY-4bj"/>
                 <constraint firstItem="VhD-dS-0D2" firstAttribute="leading" secondItem="w0n-g5-meF" secondAttribute="leading" constant="8" id="CKM-98-AuZ"/>
                 <constraint firstAttribute="trailing" secondItem="yhc-My-Vd4" secondAttribute="trailing" constant="8" id="GHD-af-Kfh"/>
+                <constraint firstItem="tWQ-bj-BlM" firstAttribute="leading" secondItem="w0n-g5-meF" secondAttribute="leading" constant="8" id="U5M-4m-cay"/>
                 <constraint firstItem="68o-Rq-Vkj" firstAttribute="leading" secondItem="w0n-g5-meF" secondAttribute="leading" constant="8" id="UQa-LP-jFv"/>
+                <constraint firstAttribute="trailing" secondItem="tWQ-bj-BlM" secondAttribute="trailing" constant="8" id="aEF-pj-hUN"/>
                 <constraint firstItem="VhD-dS-0D2" firstAttribute="top" secondItem="w0n-g5-meF" secondAttribute="top" constant="8" id="iLg-be-Yn1"/>
+                <constraint firstItem="yhc-My-Vd4" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VhD-dS-0D2" secondAttribute="trailing" constant="16" id="lzN-Dz-URc"/>
                 <constraint firstItem="yhc-My-Vd4" firstAttribute="top" secondItem="w0n-g5-meF" secondAttribute="top" constant="8" id="zxF-8s-ciU"/>
             </constraints>
-            <size key="customSize" width="246" height="133"/>
+            <size key="customSize" width="425" height="190"/>
             <connections>
                 <outlet property="brightnessLabel" destination="68o-Rq-Vkj" id="h1z-mQ-oXT"/>
+                <outlet property="brightnessSlider" destination="tWQ-bj-BlM" id="8af-Yy-Mhe"/>
                 <outlet property="onOffSwitch" destination="yhc-My-Vd4" id="unR-xD-EBV"/>
                 <outlet property="titleLabel" destination="VhD-dS-0D2" id="zYh-SH-cPk"/>
             </connections>
-            <point key="canvasLocation" x="-16" y="-42.5"/>
+            <point key="canvasLocation" x="169.5" y="-264"/>
         </collectionViewCell>
     </objects>
 </document>

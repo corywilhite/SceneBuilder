@@ -69,6 +69,10 @@ struct HueAPI {
         return update(light: light, with: ["on": false])
     }
     
+    func changeBrightness(for light: Light, to newBrightness: Int) -> Task<Void> {
+        return update(light: light, with: ["bri": newBrightness])
+    }
+    
     func update(light: Light, with state: [String: Any]) -> Task<Void> {
         
         let updateSource = TaskCompletionSource<Void>()
