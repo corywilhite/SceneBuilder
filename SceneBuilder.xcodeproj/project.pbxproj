@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		51EA2CF3F2707DDF5D79D29B /* Pods_SceneBuilder.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 599A797927A4F9283231AEC4 /* Pods_SceneBuilder.framework */; };
 		7602BB6B59FB953665FE6AB6 /* Pods_SceneBuilderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 99168858EAA8E3FD38B9493C /* Pods_SceneBuilderTests.framework */; };
+		7A2847491E2B1A1600814090 /* LightDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2847481E2B1A1600814090 /* LightDetailViewController.swift */; };
+		7A28474B1E2B1BEF00814090 /* LightDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A28474A1E2B1BEF00814090 /* LightDetailViewController.xib */; };
 		7A29E8D31E0616150023198A /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A29E8D21E0616150023198A /* ViewController.xib */; };
 		7A29E8D51E0621D50023198A /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29E8D41E0621D50023198A /* Light.swift */; };
 		7A29E8D71E0624900023198A /* WhitelistUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A29E8D61E0624900023198A /* WhitelistUser.swift */; };
@@ -39,6 +41,8 @@
 /* Begin PBXFileReference section */
 		2B4076207AB885198878C6D5 /* Pods-SceneBuilder.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SceneBuilder.release.xcconfig"; path = "Pods/Target Support Files/Pods-SceneBuilder/Pods-SceneBuilder.release.xcconfig"; sourceTree = "<group>"; };
 		599A797927A4F9283231AEC4 /* Pods_SceneBuilder.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SceneBuilder.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A2847481E2B1A1600814090 /* LightDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightDetailViewController.swift; sourceTree = "<group>"; };
+		7A28474A1E2B1BEF00814090 /* LightDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LightDetailViewController.xib; sourceTree = "<group>"; };
 		7A29E8D21E0616150023198A /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 		7A29E8D41E0621D50023198A /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		7A29E8D61E0624900023198A /* WhitelistUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WhitelistUser.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 				7A29E8DA1E075FBE0023198A /* LightsViewController.swift */,
 				7A29E8DC1E0761ED0023198A /* LightsViewController.xib */,
 				7A29E8DE1E076E020023198A /* LightCollectionViewCell.xib */,
+				7A2847481E2B1A1600814090 /* LightDetailViewController.swift */,
+				7A28474A1E2B1BEF00814090 /* LightDetailViewController.xib */,
 				7AFAA52C1DEE908D009BC953 /* Assets.xcassets */,
 				7AFAA52E1DEE908D009BC953 /* LaunchScreen.storyboard */,
 				7AFAA5311DEE908D009BC953 /* Info.plist */,
@@ -278,6 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A28474B1E2B1BEF00814090 /* LightDetailViewController.xib in Resources */,
 				7A29E8DF1E076E020023198A /* LightCollectionViewCell.xib in Resources */,
 				7AFAA5301DEE908D009BC953 /* LaunchScreen.storyboard in Resources */,
 				7A29E8D31E0616150023198A /* ViewController.xib in Resources */,
@@ -397,6 +404,7 @@
 				7A29E8D51E0621D50023198A /* Light.swift in Sources */,
 				7AEE9D761DF7EBEC0038CBB5 /* Bridge.swift in Sources */,
 				7AFAA5281DEE908D009BC953 /* ViewController.swift in Sources */,
+				7A2847491E2B1A1600814090 /* LightDetailViewController.swift in Sources */,
 				7A29E8D91E0627320023198A /* HueAPI.swift in Sources */,
 				7AEE9D741DF7EB820038CBB5 /* BridgePermissionManager.swift in Sources */,
 				7AFAA5261DEE908D009BC953 /* AppDelegate.swift in Sources */,

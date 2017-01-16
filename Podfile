@@ -11,7 +11,7 @@ target 'SceneBuilder' do
   pod 'Bolts-Swift'
   pod 'Pantry'
   pod 'ModelMapper'
-  pod 'AMViralSwitch'
+  pod 'Hero'
   
   target 'SceneBuilderTests' do
     inherit! :search_paths

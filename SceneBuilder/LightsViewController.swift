@@ -8,7 +8,7 @@
 
 import UIKit
 import BoltsSwift
-
+import Hero
 
 protocol LightCollectionCellDelegate: class {
     func didToggleOnOff(lightSwitch: UISwitch, for cell: LightCollectionViewCell)
@@ -116,8 +116,8 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.api.getLights().continueOnSuccessWith { [weak self] (lights) -> Void in
+        collectionView.heroModifiers = [.cascade]
+        api.getLights().continueOnSuccessWith { [weak self] (lights) -> Void in
             self?.lights = lights
             self?.collectionView.reloadData()
         }
@@ -134,14 +134,39 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LightCollectionViewCell.identifier, for: indexPath) as! LightCollectionViewCell
         let light = lights[indexPath.item]
         cell.configure(light: light)
+        cell.heroID = "light-background-\(light.id)"
+        cell.brightnessSlider.heroID = "light-brightness-\(light.id)"
+        cell.onOffSwitch.heroID = "light-on-off-\(light.id)"
         cell.delegate = self
         return cell
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let light = lights[indexPath.item]
+        let cell = collectionView.cellForItem(at: indexPath) as! LightCollectionViewCell
+        
+        let detailController = LightDetailViewController(light: light, api: api)
+        _ = detailController.view // trigger IBOutlets lazy load
+        detailController.colorContainer.heroID = "light-background-\(light.id)"
+        detailController.brightnessSlider.heroID = "light-brightness-\(light.id)"
+        detailController.onOffSwitch.heroID = "light-on-off-\(light.id)"
+        detailController.transferState(from: cell)
+        detailController.isHeroEnabled = true
+        
+        
+        present(detailController, animated: true, completion: nil)
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 300, height: 150)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 25, left: 25, bottom: 25, right: 25)
     }
     
     // MARK: - LightCollectionCellDelegate
@@ -169,17 +194,20 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func didBeginChangingBrightness(for cell: LightCollectionViewCell) {
-        print("begin")
+        
     }
     
     func didChangeBrightness(value: Float, for cell: LightCollectionViewCell) {
-        print("changed to: \(value)")
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         let light = lights[indexPath.item]
         
         api.changeBrightness(for: light, to: Int(value)).continueOnSuccessWith {
             print("changed \(light)")
         }
+    }
+    
+    func update(light: Light, at indexPath: IndexPath, with api: HueAPI) {
+        update(light: light, at: indexPath, with: api, after: Task({}))
     }
     
     func update<T>(light: Light, at indexPath: IndexPath, with api: HueAPI, after task: Task<T>) {
@@ -195,7 +223,7 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
         guard let indexPath = collectionView.indexPath(for: cell) else { return }
         let light = lights[indexPath.item]
         
-        update(light: light, at: indexPath, with: api, after: Task({}))
+        update(light: light, at: indexPath, with: api)
         
         print("ended")
     }
