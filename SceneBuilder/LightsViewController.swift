@@ -91,7 +91,7 @@ class LightCollectionViewCell: UICollectionViewCell {
     }
 }
 
-class LightsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, LightCollectionCellDelegate {
+class LightsViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, LightCollectionCellDelegate, LightDetailViewControllerDelegate {
     
     var lights: [Light] = []
     
@@ -135,6 +135,7 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
         let light = lights[indexPath.item]
         cell.configure(light: light)
         cell.heroID = "light-background-\(light.id)"
+        cell.titleLabel.heroID = "light-title-\(light.id)"
         cell.brightnessSlider.heroID = "light-brightness-\(light.id)"
         cell.onOffSwitch.heroID = "light-on-off-\(light.id)"
         cell.delegate = self
@@ -146,16 +147,16 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let light = lights[indexPath.item]
-        let cell = collectionView.cellForItem(at: indexPath) as! LightCollectionViewCell
         
         let detailController = LightDetailViewController(light: light, api: api)
         _ = detailController.view // trigger IBOutlets lazy load
+        detailController.titleLabel.heroID = "light-title-\(light.id)"
         detailController.colorContainer.heroID = "light-background-\(light.id)"
         detailController.brightnessSlider.heroID = "light-brightness-\(light.id)"
         detailController.onOffSwitch.heroID = "light-on-off-\(light.id)"
-        detailController.transferState(from: cell)
+        detailController.configure(light: light)
         detailController.isHeroEnabled = true
-        
+        detailController.delegate = self
         
         present(detailController, animated: true, completion: nil)
     }
@@ -226,6 +227,23 @@ class LightsViewController: UIViewController, UICollectionViewDataSource, UIColl
         update(light: light, at: indexPath, with: api)
         
         print("ended")
+    }
+    
+    // MARK: - LightDetailViewControllerDelegate
+    
+    func didUpdate(light: Light, from detailController: LightDetailViewController) {
+        
+        guard let index = lights.index(where: { $0.id == light.id } ) else {
+            return
+        }
+        
+        lights[index] = light
+        
+        let indexPath = IndexPath(item: index, section: 0)
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! LightCollectionViewCell
+        cell.configure(light: light)
+        
     }
     
 }
